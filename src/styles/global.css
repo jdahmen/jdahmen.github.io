@@ -1,1 +1,161 @@
 @import "tailwindcss";
+
+/*
+ * Palette: evergreen / bark / larch
+ *
+ * Three families only. Evergreen carries the hero, bark is the neutral
+ * everything else sits on, larch is the single accent. Neutrals are named
+ * "bark" rather than "stone" to avoid colliding with Tailwind's built-in
+ * stone palette.
+ *
+ * Prefer the semantic tokens (bg-surface, text-ink, bg-hero, ...) in markup.
+ * The raw ramps are here for the occasional one-off.
+ */
+@theme {
+	/* Evergreen — pine in shade. The hero band. */
+	--color-evergreen-50: #eef5f1;
+	--color-evergreen-100: #d5e7dd;
+	--color-evergreen-200: #adccbb;
+	--color-evergreen-300: #7faf95;
+	--color-evergreen-400: #559074;
+	--color-evergreen-500: #3a7359;
+	--color-evergreen-600: #2e5c47;
+	--color-evergreen-700: #26543f;
+	--color-evergreen-800: #1b3a2f;
+	--color-evergreen-900: #142a21;
+	--color-evergreen-950: #0c1913;
+
+	/* Bark — warm neutrals with a faint green cast, so white never goes clinical. */
+	--color-bark-50: #fafaf8;
+	--color-bark-100: #f2f2ed;
+	--color-bark-200: #e5e5de;
+	--color-bark-300: #ccccc3;
+	--color-bark-400: #a4a49a;
+	--color-bark-500: #7d7d73;
+	--color-bark-600: #5f5f56;
+	--color-bark-700: #474740;
+	--color-bark-800: #2f2f2a;
+	--color-bark-900: #1c1c19;
+	--color-bark-950: #111110;
+
+	/* Larch — needles turning in autumn. Accent only; never a surface. */
+	--color-larch-200: #eddca0;
+	--color-larch-300: #d9bc5c;
+	--color-larch-400: #c9a227;
+	--color-larch-500: #ae8a1c;
+	--color-larch-600: #937314;
+	--color-larch-700: #7d6210;
+	--color-larch-800: #634e0c;
+
+	/* Semantic tokens — values live in the :root blocks below so they flip by theme. */
+	--color-surface: var(--surface);
+	--color-surface-raised: var(--surface-raised);
+	--color-ink: var(--ink);
+	--color-ink-muted: var(--ink-muted);
+	--color-ink-subtle: var(--ink-subtle);
+	--color-line: var(--line);
+	--color-hero: var(--hero);
+	--color-hero-ink: var(--hero-ink);
+	--color-hero-ink-muted: var(--hero-ink-muted);
+	--color-hero-accent: var(--hero-accent);
+	--color-accent: var(--accent);
+	--color-accent-hover: var(--accent-hover);
+}
+
+/*
+ * Light is the default. Every text/background pair below clears WCAG AA
+ * (ink-subtle is AA large-text only — use it at 18px+ or for non-essential text).
+ */
+:root {
+	--surface: var(--color-bark-50);
+	--surface-raised: #ffffff;
+	--ink: var(--color-bark-800);
+	--ink-muted: var(--color-bark-600);
+	--ink-subtle: var(--color-bark-500);
+	--line: var(--color-bark-200);
+
+	--hero: var(--color-evergreen-800);
+	--hero-ink: var(--color-bark-50);
+	--hero-ink-muted: var(--color-evergreen-200);
+	--hero-accent: var(--color-larch-300);
+
+	--accent: var(--color-larch-700);
+	--accent-hover: var(--color-larch-800);
+
+	color-scheme: light;
+}
+
+/*
+ * Dark mode lifts the hero to evergreen-700. At evergreen-800 the band is only
+ * 1.5:1 against the near-black page below, which makes the hard edge disappear;
+ * 700 puts it at 2.2:1 while keeping hero text at AAA.
+ */
+@media (prefers-color-scheme: dark) {
+	:root {
+		--surface: var(--color-bark-950);
+		--surface-raised: var(--color-bark-900);
+		--ink: var(--color-bark-100);
+		--ink-muted: var(--color-bark-400);
+		--ink-subtle: var(--color-bark-500);
+		--line: var(--color-bark-800);
+
+		--hero: var(--color-evergreen-700);
+		--hero-ink: var(--color-bark-50);
+		--hero-ink-muted: var(--color-evergreen-200);
+		--hero-accent: var(--color-larch-300);
+
+		--accent: var(--color-larch-400);
+		--accent-hover: var(--color-larch-300);
+
+		color-scheme: dark;
+	}
+}
+
+/* Explicit overrides, for when a theme toggle lands. These win over the media query. */
+:root[data-theme="light"] {
+	--surface: var(--color-bark-50);
+	--surface-raised: #ffffff;
+	--ink: var(--color-bark-800);
+	--ink-muted: var(--color-bark-600);
+	--ink-subtle: var(--color-bark-500);
+	--line: var(--color-bark-200);
+
+	--hero: var(--color-evergreen-800);
+	--hero-ink: var(--color-bark-50);
+	--hero-ink-muted: var(--color-evergreen-200);
+	--hero-accent: var(--color-larch-300);
+
+	--accent: var(--color-larch-700);
+	--accent-hover: var(--color-larch-800);
+
+	color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+	--surface: var(--color-bark-950);
+	--surface-raised: var(--color-bark-900);
+	--ink: var(--color-bark-100);
+	--ink-muted: var(--color-bark-400);
+	--ink-subtle: var(--color-bark-500);
+	--line: var(--color-bark-800);
+
+	--hero: var(--color-evergreen-700);
+	--hero-ink: var(--color-bark-50);
+	--hero-ink-muted: var(--color-evergreen-200);
+	--hero-accent: var(--color-larch-300);
+
+	--accent: var(--color-larch-400);
+	--accent-hover: var(--color-larch-300);
+
+	color-scheme: dark;
+}
+
+/* The hero band and the page below always meet at a crisp line, never a gradient. */
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		transition-duration: 0.01ms !important;
+		animation-duration: 0.01ms !important;
+	}
+}

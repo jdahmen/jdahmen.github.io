@@ -1,4 +1,8 @@
 ---
+import { Image } from 'astro:assets';
+import profile from '../assets/profile.png';
+import GithubIcon from '../assets/icons/github.svg';
+import LinkedinIcon from '../assets/icons/linkedin.svg';
 import '../styles/global.css';
 ---
 
@@ -11,14 +15,48 @@ import '../styles/global.css';
 		<meta name="generator" content={Astro.generator} />
 		<title>Jordan Dahmen</title>
 	</head>
-	<body class="min-h-screen bg-neutral-950 text-neutral-100 antialiased">
-		<main class="mx-auto flex min-h-screen max-w-2xl flex-col justify-center px-6">
-			<h1 class="text-4xl font-semibold tracking-tight sm:text-5xl">
-				Jordan Dahmen
-			</h1>
-			<p class="mt-4 text-lg text-neutral-400">
-				Personal site — coming soon.
-			</p>
+	<body class="min-h-screen bg-surface text-ink antialiased">
+		<header class="bg-hero text-hero-ink">
+			<div class="mx-auto flex max-w-2xl flex-col items-center px-6 py-20 sm:py-28">
+				<Image
+					src={profile}
+					alt="Jordan Dahmen"
+					width={384}
+					height={384}
+					class="h-[202px] w-[202px] rounded-full object-cover grayscale sm:h-[269px] sm:w-[269px]"
+				/>
+				<h1 class="mt-6 text-5xl font-semibold tracking-tight sm:text-[58px]">
+					Jordan Dahmen
+				</h1>
+				<p class="mt-2 text-[22px] text-hero-ink-muted sm:text-[26px]">
+					Software Engineer
+				</p>
+				<div class="mt-6 flex items-center gap-6">
+					<a
+						href="https://github.com/jdahmen"
+						aria-label="GitHub"
+						class="text-hero-ink-muted transition-colors hover:text-hero-accent"
+					>
+						<GithubIcon class="h-11 w-11" aria-hidden="true" />
+					</a>
+					<a
+						href="https://linkedin.com/in/jdahmen"
+						aria-label="LinkedIn"
+						class="text-hero-ink-muted transition-colors hover:text-hero-accent"
+					>
+						<LinkedinIcon class="h-11 w-11" aria-hidden="true" />
+					</a>
+				</div>
+			</div>
+		</header>
+
+		<main class="mx-auto max-w-2xl px-6 py-16">
+			<h2 class="text-sm font-semibold tracking-widest text-ink-subtle uppercase">
+				Posts
+			</h2>
+			<div class="mt-6 border-y border-line py-8">
+				<p class="text-ink-muted">There's nothing here, yet.</p>
+			</div>
 		</main>
 	</body>
 </html>
